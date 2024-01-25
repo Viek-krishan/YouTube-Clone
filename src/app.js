@@ -1,69 +1,47 @@
-import React, { lazy, Suspense, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
-import Body from "./components/Body";
+import Home from "./components/Home";
+import VideoPage from "./components/VideoPage";
+import ChannelPage from "./components/ChannelPage";
 import Footer from "./components/Footer";
-import Error from "./components/Error";
-import RestaurantMenu from "./components/RestaurantMenu";
-import { Provider } from "react-redux";
-import store from "./utils/store";
-import UserData from "./utils/UserContext";
-// import FoodCart from "./components/FoodCart";
+import { PageProvider } from "./utils/activePage";
+import SearchFeed from "./components/SearchFeed";
 
-{
-  /*color pallets #0a0908 smoky black, #49111c dark senna, #f2f4f3 white, #a9927d pastel, #5e503f umber(brown) */
-}
-
-const FoodCart = lazy(() => import("./components/FoodCart"));
-// main container going to be rendered.
-const AppLayOut = function () {
-  const [user, setUser] = useState({
-    name: "vivek Krishan",
-    location: "Ranchi",
-    email: "vivekkrishan0@gmail.com",
-  });
-
+const AppLayout = () => {
   return (
-    <Provider store={store}>
-      <UserData.Provider
-        value={{
-          user: user,
-          setUser: setUser,
-        }}
-      >
-        <div className="container w-screen" key={"main-container"}>
-          <Header />
-          <Outlet />
-          <Footer />
-        </div>
-      </UserData.Provider>
-    </Provider>
+    <div className="container text-white bg-black w-screen overflow-hidden ">
+      <PageProvider>
+        <Header />
+        <Outlet />
+        {/* <Footer /> */}
+      </PageProvider>
+    </div>
   );
 };
 
-// Creating router configration...
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayOut />,
-    errorElement: <Error />,
+    element: <AppLayout />,
+    errorElement: "",
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <Home />,
       },
       {
-        path: "/restaurant/:id",
-        element: <RestaurantMenu />,
+        path: "/video/:id",
+        element: <VideoPage />,
       },
       {
-        path: "/FoodCart",
-        element: (
-          <Suspense>
-            <FoodCart />
-          </Suspense>
-        ),
+        path: "/channel/:id",
+        element: <ChannelPage />,
+      },
+      {
+        path: "/search/:searchTerm",
+        element: <SearchFeed />,
       },
     ],
   },
