@@ -1,7 +1,7 @@
 export const HomeShimmer = () => {
   const card = () => {
     return (
-      <div className="w-80 h-64 bg-zinc-700 rounded-3xl overflow-hidden">
+      <div className="w-80 h-64 bg-zinc-700/50 backdrop-blur-md rounded-3xl overflow-hidden">
         <div className="Thumbnail bg-gray-400 w-[90%] h-40 mt-2 m-auto rounded-2xl"></div>
         <div className="texts m-2">
           <div className="w-2/3 h-4 m-2 rounded-3xl bg-zinc-600"></div>

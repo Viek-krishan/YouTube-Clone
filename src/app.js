@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import VideoPage from "./components/VideoPage";
@@ -11,11 +12,19 @@ import SearchFeed from "./components/SearchFeed";
 
 const AppLayout = () => {
   return (
-    <div className="container text-white bg-black w-screen overflow-hidden ">
+    <div className="container text-white bg-black w-screen overflow-hidden h-screen ">
       <PageProvider>
-        <Header />
-        <Outlet />
-        {/* <Footer /> */}
+        <Auth0Provider
+          domain="dev-6ajiequ2jjlhvtxx.us.auth0.com"
+          clientId="qbdxZ6BtQJvBeTV6ExJmZlLlAQpszpnv"
+          authorizationParams={{
+            redirect_uri: window.location.origin,
+          }}
+        >
+          <Header />
+          <Outlet />
+          {/* <Footer /> */}
+        </Auth0Provider>
       </PageProvider>
     </div>
   );

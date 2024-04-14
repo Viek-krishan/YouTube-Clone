@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 const Home = () => {
   return (
-    <div className="flex w-screen h-fit">
+    <div className="flex w-screen h-fit overflow-y-hidden">
       <section className="min-w-fit sticky top-0">
         <div className="sticky top-10">
           <Navbar />

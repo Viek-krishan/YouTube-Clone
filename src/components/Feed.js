@@ -9,7 +9,6 @@ const Feed = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    
     fetchFromAPI(`search?part=snippet&q=${activePage}`).then((data) =>
       setVideos(data.items)
     );
